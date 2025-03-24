@@ -1,1 +1,2 @@
-NTU EEE FYP project AY2024/25 (Mobile App development for food and beverage businesses)
+# NTU EEE FYP Project A3194-241
+## Mobile App Development for Food and Beverage Businesses
