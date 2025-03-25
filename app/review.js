@@ -408,9 +408,10 @@ const calculateNutrition = async () => {
             <AntDesign name="left" size={24} color="black" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setModalVisible(true)}>
-          {foodImages[currentImageIndex] && (
-            <Image source={{ uri: foodImages[currentImageIndex] }} style={styles.foodImage} />
-          )}
+          <Image 
+            source={foodImages[currentImageIndex] ? { uri: foodImages[currentImageIndex] } : require("../assets/images/Makan Family-logo.png")}
+            style={styles.foodImage} 
+          />
           </TouchableOpacity>
           
           <TouchableOpacity onPress={handleNextImage} style={styles.arrow}>
@@ -424,9 +425,10 @@ const calculateNutrition = async () => {
                 <TouchableOpacity onPress={handlePreviousImage} style={styles.modalArrowLeft}>
                 <AntDesign name="left" size={30} color="white" />
                 </TouchableOpacity>
-                {foodImages[currentImageIndex] && (
-                  <Image source={{ uri: foodImages[currentImageIndex] }} style={styles.fullScreenImage} />
-                )}
+                <Image 
+                  source={foodImages[currentImageIndex] ? { uri: foodImages[currentImageIndex] } : require("../assets/images/Makan Family-logo.png")}
+                  style={styles.fullScreenImage} 
+                />
                 <TouchableOpacity onPress={handleNextImage} style={styles.modalArrowRight}>
                 <AntDesign name="right" size={30} color="white" />
                 </TouchableOpacity>
