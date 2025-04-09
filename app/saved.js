@@ -68,7 +68,7 @@ export default function Saved() {
             const formattedItem = {
                 id: item.itemId, 
                 title: itemData.title,
-                author: "Unknown", 
+                author: itemData.author, 
                 isSaved: true,
                 type: item.itemType
             };
