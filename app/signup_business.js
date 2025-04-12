@@ -119,10 +119,10 @@ export default function SignUpBusiness() {
     }
 
     // Contact number validation
-    if (formData.contactNumber && !/^\d+$/.test(formData.contactNumber)) {
-        newErrors['contactNumber'] = 'Contact number must be numeric';
-        valid = false;
-    }
+    if (formData.contactNumber && !/^[\d+\s]+$/.test(formData.contactNumber)) {
+      newErrors['contactNumber'] = 'Contact number must be numeric';
+      valid = false;
+   }
 
     // Password validation
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/;
