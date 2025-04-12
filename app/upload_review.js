@@ -28,15 +28,25 @@ export default function UploadReview() {
   });
 
   const fetchUserName = async (uid) => {
-    const userRef = doc(getFirestore(app), "users", uid);
-    const userSnap = await getDoc(userRef);
-    if (userSnap.exists()) {
-      return userSnap.data().fullName;
-    } else {
-      console.log("No such user!");
-      return null; 
-    }
-  };
+      const db = getFirestore(app);
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+    
+      if (userSnap.exists()) {
+        return userSnap.data().fullName;
+      } else {
+        const businessUserRef = doc(db, "business_users", uid);
+        const businessUserSnap = await getDoc(businessUserRef);
+    
+        if (businessUserSnap.exists()) {
+          console.log("User found in 'business_users' collection.");
+          return businessUserSnap.data().stallName;
+        }
+    
+        console.log("No such user!");
+        return null;
+      }
+    };
 
   useEffect(() => {
           // Check if the user is logged in
