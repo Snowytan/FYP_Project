@@ -284,7 +284,7 @@ const calculateNutrition = async () => {
 
   const foodName = reviewData.title;
 
-  const prompt = `Estimate the calories, fats, proteins, and carbohydrates for the food item named "${foodName}". Provide only the values.`;
+  const prompt = `List the estimated calories, fats, proteins, and carbohydrates for the food item named "${foodName}" for one serving. Return values only in this format: Calories: X kcal, Fat: Xg, Protein: Xg, Carbs: Xg.`;
 
   try {
       const response = await axios.post('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
