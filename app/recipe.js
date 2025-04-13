@@ -131,7 +131,7 @@ export default function Recipe() {
         return; 
       }
       try {
-        const unhealthyPatterns = /butter|sugar|heavy\scream|salt|oil|fat|lard|msg|artificial|nitrite|nitrate|rice|flour|bread|benzoate/i;
+        const unhealthyPatterns = /butter|white\ssugar|heavy\scream|salt|vegetable\soil|fat|lard|msg|artificial|nitrite|nitrate|white\srice|flour|white\sbread|benzoate/i;
 
         const unhealthyIngredients = ingredients
         .filter(ingredient => unhealthyPatterns.test(ingredient.name))
@@ -153,8 +153,8 @@ export default function Recipe() {
         const response = await axios.post(
           'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
           {
-            prompt: `Without explanation, provide healthier alternatives for the following ingredients that marked as "(unhealthy)": ${ingredientDetails}. No explanation`,
-            max_tokens: 100,
+            prompt: `In the list below, replace only the ingredient names that are marked with "(unhealthy)" with healthier alternatives + quantity value. Return only the updated list:\n\n${ingredientDetails}`,
+            max_tokens: 200,
             temperature: 0.3
           },
           {
@@ -165,14 +165,14 @@ export default function Recipe() {
           }
         );
         const healthierOptionsResponse = response.data.choices[0].text.trim();
-        const nutritionPrompt = `List the total estimated calories, fats, proteins, and carbohydrates for a recipe: ${healthierOptionsResponse}. Provide the values only.`;
+        const nutritionPrompt = `List the estimated total calories, fat, protein, and carbohydrates for the following list of ingredients. Return values only in this format: Calories: X kcal, Fat: Xg, Protein: Xg, Carbs: Xg. Ingredients: ${healthierOptionsResponse}`;
 
     const nutritionResponse = await axios.post(
       'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
       {
         prompt: nutritionPrompt,
-        max_tokens: 150,
-        temperature: 0.3
+        max_tokens: 100,
+        temperature: 0.1
       },
       {
         headers: {
@@ -389,7 +389,7 @@ const renderIngredients = () => {
         return `${originalQuantity} ${ingredient.unit} of ${ingredient.name}`;
     }).join(', ');
   
-    const prompt = `List the estimated calories, fats, proteins, and carbohydrates for a recipe with the following ingredients: ${Ingredients}. Provide only the values.`;
+    const prompt = `List the estimated calories, fats, proteins, and carbohydrates for a recipe with the following ingredients: ${Ingredients}. Return values only in this format: Calories: X kcal, Fat: Xg, Protein: Xg, Carbs: Xg.`;
   
     try {
         const response = await axios.post(
@@ -397,7 +397,7 @@ const renderIngredients = () => {
             {
                 prompt: prompt,
                 max_tokens: 100,
-                temperature: 0.3
+                temperature: 0.1
             },
             {
                 headers: {
@@ -423,9 +423,9 @@ const renderIngredients = () => {
 
       
       const response = await axios.post('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
-        prompt: `Given the ingredients: ${Ingredients}, provide alternative ingredients when it violates the following dietary restrictions: ${userDietInput} without explanation.`,
-        max_tokens: 100,
-        temperature: 0.3
+        prompt: `Given the ingredients: ${Ingredients}, only replace the ingredients that violates the following dietary restrictions: ${userDietInput} without explanation.`,
+        max_tokens: 150,
+        temperature: 0.2
       }, {
         headers: {
           'Authorization': `API KEY`,
