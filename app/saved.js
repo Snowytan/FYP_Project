@@ -68,7 +68,8 @@ export default function Saved() {
             const formattedItem = {
                 id: item.itemId, 
                 title: itemData.title,
-                author: itemData.author, 
+                author: itemData.author,
+                imageUrl: itemData.imageUrl,
                 isSaved: true,
                 type: item.itemType
             };
@@ -220,7 +221,7 @@ const toggleSave = async (item, isSaved) => {
               onPress={() => navigateToDetail(item)}
             >
               <Image
-                source={require("../assets/images/Makan Family-logo.png")}
+                source={item.imageUrl ? { uri: item.imageUrl } : require("../assets/images/Makan Family-logo.png")}
                 style={styles.cardImage}
               />
               <View style={styles.cardContent}>
@@ -247,7 +248,7 @@ const toggleSave = async (item, isSaved) => {
               onPress={() => navigateToDetail(item)}
             >
               <Image
-                source={require("../assets/images/Makan Family-logo.png")}
+                source={item.imageUrl ? { uri: item.imageUrl } : require("../assets/images/Makan Family-logo.png")}
                 style={styles.cardImage}
               />
               <View style={styles.cardContent}>
