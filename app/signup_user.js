@@ -98,7 +98,7 @@ export default function SignUpUser() {
   const validateForm = () => {
     let valid = true;
     let newErrors = {};
-    const requiredFields = ['fullName', 'contactNumber', 'email', 'gender', 'dob', 'password', 'confirmPassword'];
+    const requiredFields = ['fullName', 'contactNumber', 'email', 'gender', 'dateofbirth', 'password', 'confirmPassword'];
     requiredFields.forEach(field => {
       if (!formData[field].trim()) {
         newErrors[field] = 'This field is required';
@@ -189,7 +189,7 @@ export default function SignUpUser() {
         { key: 'contactNumber', label: 'Contact Number*', secure: false },
         { key: 'email', label: 'Email*', secure: false },
         { key: 'gender', label: 'Gender*', secure: false },
-        { key: 'dob', label: 'Date of Birth*', secure: false }, 
+        { key: 'dateofbirth', label: 'Date of Birth*', secure: false }, 
         { key: 'password', label: 'Password*', secure: true },
         { key: 'confirmPassword', label: 'Confirm Password*', secure: true },
         { key: 'foodAllergy', label: 'Food Allergy', secure: false },
