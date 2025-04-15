@@ -61,7 +61,7 @@ export default function ProfileUser() {
         fetchData(userDocRef);
       } else {
         Alert.alert('Authentication Error', 'You are not logged in.');
-        navigation.navigate('LoginScreen');
+        navigation.navigate('signup_login');
       }
     });
 
